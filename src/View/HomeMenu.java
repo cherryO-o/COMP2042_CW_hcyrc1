@@ -36,10 +36,8 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     private static final Color BG_COLOR = Color.WHITE;
     private static final Color TEXT_COLOR = new Color(0,0,0);//black
-    private static final Color CLICKED_BUTTON_COLOR = Color.WHITE;
-    private static final Color CLICKED_TEXT = Color.WHITE;
-    private static final int BORDER_SIZE = 5;
-    private static final float[] DASHES = {12,6};
+    private static final Color CLICKED_BUTTON_COLOR = new Color(128,128,128);
+    private static final Color CLICKED_TEXT = new Color(128,128,128);
 
     private Rectangle menuFace;
     private Rectangle startButton;
