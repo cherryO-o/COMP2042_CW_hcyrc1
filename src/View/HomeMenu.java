@@ -34,7 +34,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private static final String START_TEXT = "Start";
     private static final String MENU_TEXT = "Exit";
 
-    private static final Color BG_COLOR = Color.GREEN.darker();
+    private static final Color BG_COLOR = Color.WHITE;
     private static final Color DASH_BORDER_COLOR = new Color(200,8,21);//school bus yellow
     private static final Color BORDER_COLOR = DASH_BORDER_COLOR.brighter(); //Venetian Red
     private static final Color TEXT_COLOR = new Color(0,0,0);//black
@@ -128,8 +128,8 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.setColor(BG_COLOR);
         g2d.fill(menuFace);
 
-        Image picture = Toolkit.getDefaultToolkit().getImage("brick.jpg");
-        g2d.drawImage(picture, -1200, -1200, this);
+        Image picture = Toolkit.getDefaultToolkit().getImage("brickTime.png");
+        g2d.drawImage(picture, 20, 0, this);
 
         Stroke tmp = g2d.getStroke();
 
@@ -159,7 +159,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         int sX,sY;
 
         sX = (int)(menuFace.getWidth() - greetingsRect.getWidth()) / 2;
-        sY = (int)(menuFace.getHeight() / 4);
+        sY = (int)(menuFace.getHeight() / 3);
 
         g2d.setFont(greetingsFont);
         g2d.drawString(GREETINGS,sX,sY);
