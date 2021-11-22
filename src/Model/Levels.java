@@ -2,6 +2,9 @@ package Model;
 
 import java.awt.*;
 
+/**
+ * This class is to set and draw each level in the game
+ */
 public class Levels {
 
     private static final int LEVELS_COUNT = 4;
