@@ -55,13 +55,28 @@ public class Levels {
             tmp[i] = makeBrick(p,brickSize,type);
         }
 
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
-            p.setLocation(x,y);
-            tmp[i] = new ClayBrick(p,brickSize);
+        if(type == CLAY) {
+            for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
+                double x = (brickOnLine * brickLen) - (brickLen / 2);
+                p.setLocation(x, y);
+                tmp[i] = new ClayBrick(p, brickSize);
+            }
+        }
+        else if(type == CEMENT) {
+            for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
+                double x = (brickOnLine * brickLen) - (brickLen / 2);
+                p.setLocation(x, y);
+                tmp[i] = new CementBrick(p, brickSize);
+            }
+        }
+        else if(type == STEEL) {
+            for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
+                double x = (brickOnLine * brickLen) - (brickLen / 2);
+                p.setLocation(x, y);
+                tmp[i] = new SteelBrick(p, brickSize);
+            }
         }
         return tmp;
-
     }
 
     private static Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
