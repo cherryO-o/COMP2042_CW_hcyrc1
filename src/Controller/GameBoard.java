@@ -24,7 +24,6 @@ import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
 
-
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
@@ -32,7 +31,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final String EXIT = "Exit";
     private static final String PAUSE = "Pause Menu";
     private static final int TEXT_SIZE = 30;
-    private static final Color MENU_COLOR = new Color(0,255,0);
+    private static final Color MENU_COLOR = new Color(255,255,255);
 
 
     private static final int DEF_WIDTH = 600;

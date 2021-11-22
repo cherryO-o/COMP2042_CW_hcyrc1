@@ -43,7 +43,6 @@ public class Wall {
 
         this.startPoint = new Point(ballPos);
 
-        //3)
         levels = Levels.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
 
