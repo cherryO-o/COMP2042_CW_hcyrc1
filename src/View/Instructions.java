@@ -8,13 +8,15 @@ import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
+import java.awt.Image;
+
 
 public class Instructions extends JComponent implements MouseListener, MouseMotionListener {
     private static final String TITLE = "HOW TO PLAY";
     private static final String INSTRUCT1 = "1) Press SPACEBAR to START the game.";
-    private static final String INSTRUCT2 = "2) Press A or D to move the bar to the LEFT and RIGHT";
+    private static final String INSTRUCT2 = "2) Press A or D to move LEFT and RIGHT";
     private static final String INSTRUCT3 = "3) Press ESC to go to the MENU";
-    private static final String INSTRUCT4 = "4) Press RESTART to restart your CURRENT LEVEL";
+    private static final String INSTRUCT4 = "4) Press RESTART to restart LEVEL";
     private static final String INSTRUCT5 = "5) Press EXIT to exit the game";
     private static final String INSTRUCT6 = "6) DESTROY all bricks to WIN";
 
@@ -25,9 +27,9 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
     private Font backFont;
 
     private static final Color BG_COLOR = Color.WHITE;
-    private static final Color TEXT_COLOR = new Color(0, 0, 0);//black
-    private static final Color CLICKED_BUTTON_COLOR = new Color(128, 128, 128);
-    private static final Color CLICKED_TEXT = new Color(128, 128, 128);
+    private static final Color TEXT_COLOR = Color.BLACK;//black
+    private static final Color CLICKED_BUTTON_COLOR = new Color(255,255,255);
+    private static final Color CLICKED_TEXT = new Color(255,255,255);
 
     private Rectangle menuFace;
     private Rectangle backButton;
@@ -52,17 +54,15 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         backButton = new Rectangle(btn);
 
         textFont = new Font("Noto Mono",Font.PLAIN,25);;
-        titleFont = new Font("Noto Mono",Font.PLAIN,25);
-        backFont = new Font("Monospaced",Font.PLAIN,25);
+        titleFont = new Font("Noto Mono",Font.BOLD,35);
+        backFont = new Font("Arial",Font.BOLD,25);
     }
 
     public void paint(Graphics g){
         drawInstruct((Graphics2D)g);
-        System.out.println("PAINT");
     }
 
     private void drawInstruct(Graphics2D g) {
-        System.out.println("paint component 1");
         drawContainer(g);
 
         Color prevColor = g.getColor();
@@ -85,6 +85,11 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
 
         g.setColor(BG_COLOR);
         g.fill(menuFace);
+
+        Image picture = Toolkit.getDefaultToolkit().getImage("brownBrick.gif");
+        Image newPic = picture.getScaledInstance(550,432, java.awt.Image.SCALE_SMOOTH);
+        g.drawImage(picture, 0, 0, this);
+
     }
 
     private void drawText(Graphics2D g){
@@ -104,36 +109,36 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         int sX, sY;
 
         sX = (int)(menuFace.getWidth() - titleRect.getWidth()) / 2;
-        sY = (int)(menuFace.getHeight() / 3);
+        sY = (int)(menuFace.getHeight() / 6);
         g.setFont(titleFont);
         g.drawString(TITLE,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
-        sY += (int) xtxtRect1.getHeight() * 1.1;//add 10% of String height between the two strings
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
+        sY += (int) xtxtRect1.getHeight() * 1.5;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT1,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
         sY += (int) xtxtRect2.getHeight() * 1.1;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT2,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
         sY += (int) xtxtRect3.getHeight() * 1.1;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT3,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
         sY += (int) xtxtRect4.getHeight() * 1.1;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT4,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
         sY += (int) xtxtRect5.getHeight() * 1.1;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT5,sX,sY);
 
-        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 2;
+        sX = (int)(menuFace.getWidth() - xtxtRect1.getWidth()) / 4;
         sY += (int) xtxtRect6.getHeight() * 1.1;//add 10% of String height between the two strings
         g.setFont(textFont);
         g.drawString(INSTRUCT6,sX,sY);
@@ -147,7 +152,7 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         g.setFont(backFont);
 
         int x = (menuFace.width - backButton.width) / 2;
-        int y =(int) ((menuFace.height - backButton.height) * 0.7);
+        int y =(int) ((menuFace.height - backButton.height) * 0.8);
 
         backButton.setLocation(x,y);
 
@@ -156,6 +161,7 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
 
         x += backButton.x;
         y += backButton.y + (backButton.height * 0.9);
+        y-= 6;
 
         if(backClicked){
             Color tmp = g.getColor();
