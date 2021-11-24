@@ -117,25 +117,17 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
     private void drawContainer(Graphics2D g2d){
-        Color prev = g2d.getColor();
 
         g2d.setColor(BG_COLOR);
         g2d.fill(menuFace);
 
         Image picture = Toolkit.getDefaultToolkit().getImage("brickTime.png");
         g2d.drawImage(picture, 20, 0, this);
-
-        Stroke tmp = g2d.getStroke();
-
-        g2d.setStroke(tmp);
-
-        g2d.setColor(prev);
     }
 
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
-
         FontRenderContext frc = g2d.getFontRenderContext();
 
         Rectangle2D greetingsRect = greetingsFont.getStringBounds(GREETINGS,frc);
@@ -268,7 +260,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
             System.exit(0);
         }
         else if(instructionButton.contains(p)){
-            owner.enableGameBoard();
+            owner.enableInstruction();
         }
     }
 
