@@ -44,10 +44,6 @@ public class Player {
 
     }
 
-    private void weirdthing(){
-
-    }
-
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
