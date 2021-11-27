@@ -44,6 +44,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Wall wall;
 
     private String message;
+    private String heart;
 
     private boolean showPauseMenu;
 
@@ -54,7 +55,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle restartButtonRect;
     private int strLen;
 
-    //???
     private DebugConsole debugConsole;
 
 
@@ -78,7 +78,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d %s",wall.getBrickCount(),Lives());
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
                     wall.wallReset();
@@ -264,6 +264,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
+    }
+
+    public String Lives(){
+        heart = "";
+        for(int a = 0; a < wall.getBallCount(); a++)
+            heart += new String(Character.toChars(0x1F497));
+        return heart;
     }
 
     @Override
