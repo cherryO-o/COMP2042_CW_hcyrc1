@@ -35,9 +35,9 @@ public class Wall {
     private int level;
 
     private Point startPoint;
-    private int brickCount;
-    private int ballCount;
-    private boolean ballLost;
+    private static int brickCount;
+    private static int ballCount;
+    private static boolean ballLost;
 
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
@@ -128,15 +128,15 @@ public class Wall {
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
-    public int getBrickCount(){
+    public static int getBrickCount(){
         return brickCount;
     }
 
-    public int getBallCount(){
+    public static int getBallCount(){
         return ballCount;
     }
 
-    public boolean isBallLost(){
+    public static boolean isBallLost(){
         return ballLost;
     }
 
@@ -187,8 +187,15 @@ public class Wall {
         ball.setYSpeed(s);
     }
 
-    public void resetBallCount(){
+    public static void resetBallCount(){
         ballCount = 3;
     }
 
+    public static void ballLost(boolean Lost){
+        ballLost = Lost;
+    }
+
+    public static void setBrickCount(int count) {
+        brickCount = count;
+    }
 }
