@@ -8,3 +8,5 @@ interface Screen {
     void drawText(Graphics2D g2d);
     void drawButton(Graphics2D g2d);
 }
+
+

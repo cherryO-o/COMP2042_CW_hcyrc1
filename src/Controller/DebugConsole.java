@@ -65,8 +65,6 @@ public class DebugConsole extends JDialog implements WindowListener{
         this.setLocation(x,y);
     }
 
-    private void newthing(){}
-
     @Override
     public void windowOpened(WindowEvent windowEvent) {
 

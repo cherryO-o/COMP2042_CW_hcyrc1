@@ -22,7 +22,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
-
+import java.util.TimerTask;
 
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
@@ -33,7 +33,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final int TEXT_SIZE = 30;
     private static final Color MENU_COLOR = new Color(255,255,255);
 
-
     private static final int DEF_WIDTH = 600;
     private static final int DEF_HEIGHT = 450;
 
@@ -41,10 +40,14 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private Timer gameTimer;
 
+//    private int second = 0;
+//    private String counter;
+
     private Wall wall;
 
     private String message;
     private String heart;
+    //private String message2;
 
     private boolean showPauseMenu;
 
@@ -57,7 +60,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private DebugConsole debugConsole;
 
-
     public GameBoard(JFrame owner){
         super();
 
@@ -69,6 +71,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
+        //message2 = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
         debugConsole = new DebugConsole(owner,wall,this);
@@ -78,7 +81,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
+
+            //message2 = String.format("Timer: %s",countDown());
             message = String.format("Bricks: %d %s",wall.getBrickCount(),Lives());
+
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
                     wall.wallReset();
@@ -106,8 +112,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     }
 
-
-
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
@@ -115,6 +119,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addKeyListener(this);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+
     }
 
 
@@ -130,6 +135,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
+        //g2d.drawString(message2,275,205);
+
+        //counter = new CountdownTimer(g);
 
         drawBall(wall.ball,g2d);
 
@@ -266,12 +274,25 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
-    public String Lives(){
+    private String Lives(){
         heart = "";
         for(int a = 0; a < wall.getBallCount(); a++)
             heart += new String(Character.toChars(0x1F497));
         return heart;
     }
+
+//    private String countDown() {
+//
+//        TimerTask task = new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                second++;
+//                counter = ("%d" + second);
+//            }
+//        };
+//        return counter;
+//    }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
