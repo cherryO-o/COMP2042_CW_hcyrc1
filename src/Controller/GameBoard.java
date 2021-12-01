@@ -80,6 +80,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.move();
             wall.findImpacts();
 
+            message2 = String.format("%d",countDown.getSeconds());
             message = String.format("Bricks: %d %s",wall.getBrickCount(),Lives());
 
             if(wall.isBallLost()){
@@ -90,10 +91,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 wall.ballReset();
                 gameTimer.stop();
             }
+            else if(countDown.getSeconds() == 0) {
+                message = "Go to Next Level";
+                gameTimer.stop();
+                wall.ballReset();
+                wall.wallReset();
+                wall.nextLevel();
+            }
             else if(wall.isDone()){
                 if(wall.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
+                    countDown.resetTimer();
                     wall.ballReset();
                     wall.wallReset();
                     wall.nextLevel();
