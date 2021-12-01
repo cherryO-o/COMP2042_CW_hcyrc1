@@ -39,15 +39,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final Color BG_COLOR = Color.WHITE;
 
     private Timer gameTimer;
-
-//    private int second = 0;
-//    private String counter;
+    private CountDown countDown = new CountDown();
 
     private Wall wall;
 
     private String message;
     private String heart;
-    //private String message2;
+    private String message2;
 
     private boolean showPauseMenu;
 
@@ -71,7 +69,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
-        //message2 = "";
+        message2 = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
         debugConsole = new DebugConsole(owner,wall,this);
@@ -82,7 +80,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.move();
             wall.findImpacts();
 
-            //message2 = String.format("Timer: %s",countDown());
             message = String.format("Bricks: %d %s",wall.getBrickCount(),Lives());
 
             if(wall.isBallLost()){
@@ -135,7 +132,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
-        //g2d.drawString(message2,275,205);
+        g2d.drawString(message2,275,205);
 
         //counter = new CountdownTimer(g);
 
@@ -274,25 +271,16 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
+    /**
+     * Let ballCount be represented by emojis instead of integers
+     * @return heart (emoji)
+     */
     private String Lives(){
         heart = "";
         for(int a = 0; a < wall.getBallCount(); a++)
             heart += new String(Character.toChars(0x1F497));
         return heart;
     }
-
-//    private String countDown() {
-//
-//        TimerTask task = new TimerTask() {
-//
-//            @Override
-//            public void run() {
-//                second++;
-//                counter = ("%d" + second);
-//            }
-//        };
-//        return counter;
-//    }
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
@@ -311,13 +299,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 showPauseMenu = !showPauseMenu;
                 repaint();
                 gameTimer.stop();
+                countDown.stopTimer();
                 break;
             case KeyEvent.VK_SPACE:
                 if(!showPauseMenu)
-                    if(gameTimer.isRunning())
+                    if(gameTimer.isRunning()) {
                         gameTimer.stop();
-                    else
+                        countDown.stopTimer();
+                    }
+                    else {
                         gameTimer.start();
+                        countDown.countDownStart();
+                    }
                 break;
             case KeyEvent.VK_F1:
                 if(keyEvent.isAltDown() && keyEvent.isShiftDown())
@@ -346,6 +339,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.ballReset();
             wall.wallReset();
             showPauseMenu = false;
+            countDown.resetTimer();
             repaint();
         }
         else if(exitButtonRect.contains(p)){
@@ -395,6 +389,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     public void onLostFocus(){
         gameTimer.stop();
+        countDown.stopTimer();
         message = "Focus Lost";
         repaint();
     }
