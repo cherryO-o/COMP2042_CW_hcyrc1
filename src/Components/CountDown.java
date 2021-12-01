@@ -7,7 +7,6 @@ public class CountDown implements ActionListener{
     public CountDown(){}
 
     Timer timer = new Timer(1000, this);
-    int minutes = 2;
     int seconds = 60;
 
 
@@ -16,13 +15,14 @@ public class CountDown implements ActionListener{
     }
 
     public void resetTimer() {
-        minutes = 2;
         seconds = 60;
     }
 
     public void stopTimer() {
         timer.stop();
     }
+
+    public int getSeconds() {return seconds;}
 
     public void actionPerformed(ActionEvent e) {
 
