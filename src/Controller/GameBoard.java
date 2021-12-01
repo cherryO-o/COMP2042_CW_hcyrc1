@@ -141,7 +141,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
-        g2d.drawString(message2,275,205);
+        g2d.drawString(message2,285,205);
 
         //counter = new CountdownTimer(g);
 
