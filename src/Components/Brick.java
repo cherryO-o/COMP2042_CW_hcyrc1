@@ -6,8 +6,7 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 /**
- * Created by filippo on 04/09/16.
- *
+ *Has characteristics of a brick
  */
 abstract public class Brick  {
 

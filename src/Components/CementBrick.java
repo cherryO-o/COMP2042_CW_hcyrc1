@@ -4,7 +4,10 @@ import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
-
+/**
+ * A type of brick, extended from Brick class
+ * Has object crack to create cracks on brick when hit
+ */
 public class CementBrick extends Brick {
 
 

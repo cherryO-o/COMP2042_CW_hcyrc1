@@ -3,11 +3,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The Countdown timer for the game
+ */
 public class CountDown implements ActionListener{
     public CountDown(){}
 
     Timer timer = new Timer(1000, this);
-    int seconds = 60;
+    int seconds = 120;
 
 
     public void countDownStart() {

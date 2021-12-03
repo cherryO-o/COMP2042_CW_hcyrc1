@@ -19,7 +19,9 @@ package Components;
 
 import java.awt.*;
 
-
+/**
+ * The paddle controlled by the player
+ */
 public class Player {
 
 

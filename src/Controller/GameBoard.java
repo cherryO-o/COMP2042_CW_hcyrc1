@@ -22,8 +22,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
-import java.util.TimerTask;
 
+/**
+ * Class for the game screen
+ */
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
@@ -58,6 +60,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private DebugConsole debugConsole;
 
+    /**
+     * Prints out timer, brickCount lives and messages on game screen
+     * @param owner
+     */
     public GameBoard(JFrame owner){
         super();
 
@@ -94,6 +100,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             else if(countDown.getSeconds() == 0) {
                 message = "Go to Next Level";
                 gameTimer.stop();
+                countDown.resetTimer();
                 wall.ballReset();
                 wall.wallReset();
                 wall.nextLevel();
@@ -125,9 +132,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addKeyListener(this);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-
     }
-
 
     /**
      * made wall.ball, wall.bricks, wall.player public
@@ -295,6 +300,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public void keyTyped(KeyEvent keyEvent) {
     }
 
+    /**
+     * Keys A & D to change player movement, Space to start/stop game,
+     * @param keyEvent
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()){
@@ -334,6 +343,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         wall.player.stop();
     }
 
+    /**
+     * Click Continue to continue game
+     * Click Restart to restart level
+     * Click Exit to exit game
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -354,7 +369,6 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         else if(exitButtonRect.contains(p)){
             System.exit(0);
         }
-
     }
 
     @Override

@@ -21,7 +21,9 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-
+/**
+ * A type of brick, extended from Brick class
+ */
 public class SteelBrick extends Brick {
 
     private static final String NAME = "Steel Brick";

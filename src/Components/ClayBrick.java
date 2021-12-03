@@ -5,8 +5,7 @@ import java.awt.Point;
 
 
 /**
- * Created by filippo on 04/09/16.
- *
+ * A type of brick, extended from Brick class
  */
 public class ClayBrick extends Brick {
 

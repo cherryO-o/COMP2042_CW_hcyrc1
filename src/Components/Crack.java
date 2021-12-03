@@ -5,6 +5,9 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+/**
+ * Creates crack on bricks
+ */
 public class Crack {
 
     private static final int CRACK_SECTIONS = 3;
