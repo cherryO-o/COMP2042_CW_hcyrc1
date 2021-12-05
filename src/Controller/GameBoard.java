@@ -100,27 +100,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.wallReset();
                     message = "Game over";
 //                    highscore = "high score: " + wall.highScore();
-                    wall.ReadWriteFile();
+//                    wall.ReadWriteFile();
                 }
                 wall.ballReset();
                 gameTimer.stop();
             }
-            else if(countDown.getSeconds() == 0) {
-                message = "Go to Next Level";
-//                highscore = "high score: " + wall.highScore();
-                gameTimer.stop();
-                countDown.resetTimer();
-                wall.resetScore();
-                wall.ballReset();
-                wall.wallReset();
-                wall.nextLevel();
-            }
-            else if(wall.isDone()){
+            else if(wall.isDone() || countDown.getSeconds() == 0){
                 if(wall.hasLevel()){
                     message = "Go to Next Level";
 //                    highscore = "high score: " + wall.highScore();
                     gameTimer.stop();
                     countDown.resetTimer();
+                    wall.highScore();
                     wall.resetScore();
                     wall.ballReset();
                     wall.wallReset();
@@ -129,7 +120,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 else{
                     message = "ALL WALLS DESTROYED";
                     gameTimer.stop();
-                    wall.ReadWriteFile();
+                    wall.highScore();
+                    wall.printScore();
+//                    wall.ReadWriteFile();
 //                    highscore = "high score: " + wall.highScore();
                 }
             }
