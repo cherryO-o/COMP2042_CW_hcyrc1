@@ -18,7 +18,7 @@ public class CountDown implements ActionListener{
     }
 
     public void resetTimer() {
-        seconds = 60;
+        seconds = 120;
     }
 
     public void stopTimer() {
