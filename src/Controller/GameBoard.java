@@ -48,6 +48,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private String message;
     private String heart;
     private String message2;
+    private String scoreCount;
 
     private boolean showPauseMenu;
 
@@ -57,6 +58,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
     private int strLen;
+
+    private String highscore;
 
     private DebugConsole debugConsole;
 
@@ -76,6 +79,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.initialize();
         message = "";
         message2 = "";
+        scoreCount = "";
+        //highscore = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
         debugConsole = new DebugConsole(owner,wall,this);
@@ -88,19 +93,24 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
             message2 = String.format("%d",countDown.getSeconds());
             message = String.format("Bricks: %d %s",wall.getBrickCount(),Lives());
+            scoreCount = String.format("Score: %d", wall.getScore());
 
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
                     wall.wallReset();
                     message = "Game over";
+//                    highscore = "high score: " + wall.highScore();
+                    wall.ReadWriteFile();
                 }
                 wall.ballReset();
                 gameTimer.stop();
             }
             else if(countDown.getSeconds() == 0) {
                 message = "Go to Next Level";
+//                highscore = "high score: " + wall.highScore();
                 gameTimer.stop();
                 countDown.resetTimer();
+                wall.resetScore();
                 wall.ballReset();
                 wall.wallReset();
                 wall.nextLevel();
@@ -108,8 +118,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             else if(wall.isDone()){
                 if(wall.hasLevel()){
                     message = "Go to Next Level";
+//                    highscore = "high score: " + wall.highScore();
                     gameTimer.stop();
                     countDown.resetTimer();
+                    wall.resetScore();
                     wall.ballReset();
                     wall.wallReset();
                     wall.nextLevel();
@@ -117,6 +129,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 else{
                     message = "ALL WALLS DESTROYED";
                     gameTimer.stop();
+                    wall.ReadWriteFile();
+//                    highscore = "high score: " + wall.highScore();
                 }
             }
 
@@ -147,8 +161,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
         g2d.drawString(message2,285,205);
-
-        //counter = new CountdownTimer(g);
+        g2d.drawString(scoreCount, 270,240);
 
         drawBall(wall.ball,g2d);
 
@@ -364,6 +377,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.wallReset();
             showPauseMenu = false;
             countDown.resetTimer();
+            wall.resetScore();
             repaint();
         }
         else if(exitButtonRect.contains(p)){
