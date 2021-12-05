@@ -4,6 +4,7 @@ import java.awt.*;
 
 /**
  * This class is to set and draw each level in the game
+ * Separated from Wall class
  */
 public class Levels {
 
