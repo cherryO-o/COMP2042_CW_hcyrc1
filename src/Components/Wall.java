@@ -19,13 +19,7 @@ package Components;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
-import java.util.StringTokenizer;
-
 
 public class Wall {
 
@@ -44,14 +38,13 @@ public class Wall {
     private static int ballCount;
     private static boolean ballLost;
 
+    //for score and highscore
     static int score;
-    private int highScoreLevel[] = new int[6];
-
-    //int brokenBrick = 0;
+    private int levelScore[] = new int[6];
 
     int i;
     int count = 0;
-    int readScore[] = new int[4];
+    int readHighScore[] = new int[6];
 
     /**
      *
@@ -115,11 +108,10 @@ public class Wall {
                 count = 0;
             }
             else {
-                score+=10;
-                score += count;
-                count = 0;
+                score += 10;
+//                score += count;
+                  count = 0;
             }
-            //incrementScore();
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -132,41 +124,6 @@ public class Wall {
             ballLost = true;
         }
     }
-
-    public void ReadWriteFile(){
-        try{
-            //fetch high score from txt file
-            int x = 0;
-            BufferedReader br = new BufferedReader(new FileReader("score.txt"));
-            String str = br.readLine();
-            while(str != null){
-                StringTokenizer st = new StringTokenizer(str, ";");
-                readScore[x] = Integer.parseInt(st.nextToken());
-                x++;
-                str = br.readLine();
-            }
-            br.close();
-            //comparing high score from user and from txt file and store it into txt file
-            FileWriter fw = new FileWriter("score.txt");
-            for(x = 0; x < highScoreLevel.length; x++){
-                if(highScoreLevel[x] > readScore[x])
-                    fw.write(highScoreLevel[x] + ";\n");
-                else
-                    fw.write(readScore[x] + ";\n");
-            }
-            fw.close();
-        }catch(IOException e){System.out.println("An error occurred");}
-    }
-
-//    private void incrementScore() {
-//        String checkBrickType = bricks[brokenBrick].getClass().getName();
-//        switch (checkBrickType) {
-//            case "Components.ClayBrick" -> ClayBrick.setBrickScore();
-//            case "Components.CementBrick" -> CementBrick.setBrickScore();
-//            case "Components.SteelBrick" -> score += 3;
-//        }
-//        //setScore(score);
-//    }
 
     public void resetScore() {
         score = 0;
@@ -183,36 +140,47 @@ public class Wall {
                 //Vertical Impact
                 case Brick.UP_IMPACT:
                     ball.reverseY();
-                    count++;
+                    addScore();
                     return b.setImpact(ball.down, Crack.UP);
 
                 case Brick.DOWN_IMPACT:
                     ball.reverseY();
-                    count++;
+                    addScore();
                     return b.setImpact(ball.up, Crack.DOWN);
 
                 //Horizontal Impact
                 case Brick.LEFT_IMPACT:
                     ball.reverseX();
-                    count++;
+                    addScore();
                     return b.setImpact(ball.right, Crack.RIGHT);
 
                 case Brick.RIGHT_IMPACT:
                     ball.reverseX();
-                    count++;
+                    addScore();
                     return b.setImpact(ball.left, Crack.LEFT);
             }
-            //brokenBrick = i;
         }
         return false;
     }
 
-    public int highScore() {
+    private void addScore() {
+        count++;
+        score += count;
+        count = 0;
+    }
+
+    public void highScore() {
         int score = getScore();
-        if(i < 6)
-            highScoreLevel[i] = score;
+        if(i < 6){
+            levelScore[i] = score;
+        }
         i++;
-        return score;
+    }
+
+    public void printScore() {
+        for(int i = 0; i<6; i++) {
+            System.out.println(levelScore[i]);
+        }
     }
 
     private boolean impactBorder(){
@@ -290,10 +258,6 @@ public class Wall {
     public static void setBrickCount(int count) {
         brickCount = count;
     }
-
-//    public static void setScore(int newScore) {
-//        score += newScore;
-//    }
 
     public int getScore() {
         return score;
