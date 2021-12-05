@@ -55,7 +55,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
 
-
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

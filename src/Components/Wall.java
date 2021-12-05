@@ -19,7 +19,12 @@ package Components;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 
 public class Wall {
@@ -39,6 +44,23 @@ public class Wall {
     private static int ballCount;
     private static boolean ballLost;
 
+    static int score;
+    private int highScoreLevel[] = new int[6];
+
+    //int brokenBrick = 0;
+
+    int i;
+    int count = 0;
+    int readScore[] = new int[4];
+
+    /**
+     *
+     * @param drawArea = the area where the bricks are drawn
+     * @param brickCount = number of bricks for each level
+     * @param lineCount = lines between bricks
+     * @param brickDimensionRatio = size of brick
+     * @param ballPos = position of ball
+     */
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         this.startPoint = new Point(ballPos);
@@ -65,7 +87,7 @@ public class Wall {
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
 
         area = drawArea;
-
+        i=0;
 
     }
 
@@ -87,6 +109,17 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
+
+            if(count == 1) {
+                score+=10;
+                count = 0;
+            }
+            else {
+                score+=10;
+                score += count;
+                count = 0;
+            }
+            //incrementScore();
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -100,27 +133,86 @@ public class Wall {
         }
     }
 
+    public void ReadWriteFile(){
+        try{
+            //fetch high score from txt file
+            int x = 0;
+            BufferedReader br = new BufferedReader(new FileReader("score.txt"));
+            String str = br.readLine();
+            while(str != null){
+                StringTokenizer st = new StringTokenizer(str, ";");
+                readScore[x] = Integer.parseInt(st.nextToken());
+                x++;
+                str = br.readLine();
+            }
+            br.close();
+            //comparing high score from user and from txt file and store it into txt file
+            FileWriter fw = new FileWriter("score.txt");
+            for(x = 0; x < highScoreLevel.length; x++){
+                if(highScoreLevel[x] > readScore[x])
+                    fw.write(highScoreLevel[x] + ";\n");
+                else
+                    fw.write(readScore[x] + ";\n");
+            }
+            fw.close();
+        }catch(IOException e){System.out.println("An error occurred");}
+    }
+
+//    private void incrementScore() {
+//        String checkBrickType = bricks[brokenBrick].getClass().getName();
+//        switch (checkBrickType) {
+//            case "Components.ClayBrick" -> ClayBrick.setBrickScore();
+//            case "Components.CementBrick" -> CementBrick.setBrickScore();
+//            case "Components.SteelBrick" -> score += 3;
+//        }
+//        //setScore(score);
+//    }
+
+    public void resetScore() {
+        score = 0;
+    }
+
+    /**
+     *
+     * @return
+     */
     private boolean impactWall(){
-        for(Brick b : bricks){
+        for(int i = 0; i<bricks.length; i++){
+            Brick b = bricks[i];
             switch(b.findImpact(ball)) {
                 //Vertical Impact
                 case Brick.UP_IMPACT:
                     ball.reverseY();
+                    count++;
                     return b.setImpact(ball.down, Crack.UP);
+
                 case Brick.DOWN_IMPACT:
                     ball.reverseY();
+                    count++;
                     return b.setImpact(ball.up, Crack.DOWN);
 
                 //Horizontal Impact
                 case Brick.LEFT_IMPACT:
                     ball.reverseX();
+                    count++;
                     return b.setImpact(ball.right, Crack.RIGHT);
+
                 case Brick.RIGHT_IMPACT:
                     ball.reverseX();
+                    count++;
                     return b.setImpact(ball.left, Crack.LEFT);
             }
+            //brokenBrick = i;
         }
         return false;
+    }
+
+    public int highScore() {
+        int score = getScore();
+        if(i < 6)
+            highScoreLevel[i] = score;
+        i++;
+        return score;
     }
 
     private boolean impactBorder(){
@@ -197,5 +289,13 @@ public class Wall {
 
     public static void setBrickCount(int count) {
         brickCount = count;
+    }
+
+//    public static void setScore(int newScore) {
+//        score += newScore;
+//    }
+
+    public int getScore() {
+        return score;
     }
 }
