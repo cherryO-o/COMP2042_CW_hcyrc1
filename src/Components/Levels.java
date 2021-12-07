@@ -15,12 +15,13 @@ public class Levels {
     private final int CLAY = makeBrickFactory.CLAY;
     private final int STEEL = makeBrickFactory.STEEL;
     private final int CEMENT = makeBrickFactory.CEMENT;
+    private final int SPEED = makeBrickFactory.SPEED;
 
     public Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
-        tmp[0] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY, CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CEMENT,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL, STEEL);
+        tmp[0] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,SPEED, CLAY);
+        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,SPEED,CEMENT);
+        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,SPEED, STEEL);
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
         tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
         tmp[5] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
