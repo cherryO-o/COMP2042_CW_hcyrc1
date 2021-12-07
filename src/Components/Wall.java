@@ -29,6 +29,7 @@ public class Wall {
     public Brick[] bricks;
     public Ball ball;
     public Player player;
+    private Levels wallLevel = new Levels();
 
     private Brick[][] levels;
     private int level;
@@ -40,11 +41,10 @@ public class Wall {
 
     //for score and highscore
     static int score;
-    private int levelScore[] = new int[6];
+    public int levelScore[] = new int[6];
 
     int i;
     int count = 0;
-    int readHighScore[] = new int[6];
 
     /**
      *
@@ -58,7 +58,7 @@ public class Wall {
 
         this.startPoint = new Point(ballPos);
 
-        levels = Levels.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
+        levels = wallLevel.makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
 
         ballCount = 3;
@@ -177,12 +177,6 @@ public class Wall {
         i++;
     }
 
-    public void printScore() {
-        for(int i = 0; i<6; i++) {
-            System.out.println(levelScore[i]);
-        }
-    }
-
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
@@ -259,7 +253,7 @@ public class Wall {
         brickCount = count;
     }
 
-    public int getScore() {
+    public static int getScore() {
         return score;
     }
 }
