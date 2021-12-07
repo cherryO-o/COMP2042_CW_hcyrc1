@@ -21,8 +21,8 @@ abstract public class Ball {
     private Color border;
     private Color inner;
 
-    private int speedX;
-    private int speedY;
+    private static int speedX;
+    private static int speedY;
 
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){
         this.center = center;
@@ -61,7 +61,12 @@ abstract public class Ball {
         ballFace = tmp;
     }
 
-    public void setSpeed(int x,int y){
+    public static void setSpeed(int x,int y){
+        speedX = x;
+        speedY = y;
+    }
+
+    public static void updateSpeed(int x, int y) {
         speedX = x;
         speedY = y;
     }
