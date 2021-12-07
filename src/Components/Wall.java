@@ -68,12 +68,8 @@ public class Wall {
 
         makeBall(ballPos);
         int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
+        speedX = 3;
+        speedY = -3;
 
         ball.setSpeed(speedX,speedY);
 
@@ -198,13 +194,8 @@ public class Wall {
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
         int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
-
+        speedX = 3;
+        speedY = -3;
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }
