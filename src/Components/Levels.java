@@ -10,11 +10,13 @@ public class Levels {
 
     private static final int LEVELS_COUNT = 6;
 
-    private static final int CLAY = 1;
-    private static final int STEEL = 2;
-    private static final int CEMENT = 3;
+    private MakeBrickFactory makeBrickFactory = new MakeBrickFactory();
 
-    public static Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
+    private final int CLAY = makeBrickFactory.CLAY;
+    private final int STEEL = makeBrickFactory.STEEL;
+    private final int CEMENT = makeBrickFactory.CEMENT;
+
+    public Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY, CLAY);
         tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CEMENT,CEMENT);
@@ -35,7 +37,7 @@ public class Levels {
      * @param typeB = 2nd type of brick
      * @return tmp, type Brick[]
      */
-    private static Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
+    private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
@@ -69,25 +71,14 @@ public class Levels {
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
+            tmp[i] = b ?  makeBrickFactory.makeBrick(p,brickSize,typeA) : makeBrickFactory.makeBrick(p,brickSize,typeB);
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,typeA);
+            tmp[i] = makeBrickFactory.makeBrick(p,brickSize,typeA);
         }
         return tmp;
-    }
-
-
-    private static Brick makeBrick(Point point, Dimension size, int type){
-        Brick out = switch (type) {
-            case CLAY -> new ClayBrick(point, size);
-            case STEEL -> new SteelBrick(point, size);
-            case CEMENT -> new CementBrick(point, size);
-            default -> throw new IllegalArgumentException(String.format("Unknown Type:%d\n", type));
-        };
-        return  out;
     }
 }
