@@ -3,6 +3,9 @@ package Components;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing on Player
+ */
 class PlayerTest {
 
     @Test
