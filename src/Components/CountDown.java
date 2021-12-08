@@ -4,14 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The Countdown timer for the game
+ * The Countdown timer for the game, limit is 120 seconds
  */
 public class CountDown implements ActionListener{
     public CountDown(){}
 
     Timer timer = new Timer(1000, this);
     int seconds = 120;
-
 
     public void countDownStart() {
         timer.start();
@@ -27,13 +26,15 @@ public class CountDown implements ActionListener{
 
     public int getSeconds() {return seconds;}
 
+    /**
+     * Decreases timer at every second, if seconds = 0 then stop timer
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
 
         if (seconds == 0)
             timer.stop();
-        else{
+        else
             seconds--;
-            System.out.println(seconds);
-        }
     }
 }
