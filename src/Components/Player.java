@@ -36,7 +36,13 @@ public class Player {
     private int min;
     private int max;
 
-
+    /**
+     * Player constructor
+     * @param ballPoint
+     * @param width = width of paddle
+     * @param height = height of paddle
+     * @param container = the rectangle for the player's paddle
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
@@ -46,15 +52,29 @@ public class Player {
 
     }
 
+    /**
+     * Creates player paddle
+     * @param width
+     * @param height
+     * @return
+     */
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
 
+    /**
+     * Gets position of ball upon impact on ball
+     * @param b
+     * @return
+     */
     public boolean impact(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.down) ;
     }
 
+    /**
+     * Allows player to move
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -79,6 +99,10 @@ public class Player {
         return  playerFace;
     }
 
+    /**
+     * Calculates where the player moves to
+     * @param p
+     */
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
