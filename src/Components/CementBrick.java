@@ -18,8 +18,13 @@ public class CementBrick extends Brick {
 
     private Crack crack;
     private Shape brickFace;
+    private CountDown countDown = new CountDown();
 
-
+    /**
+     * Sets cement brick's size, strength, color and crack characteristic
+     * @param point
+     * @param size
+     */
     public CementBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,CEMENT_STRENGTH);
         crack = new Crack(CementBrick.this, DEF_CRACK_DEPTH,DEF_STEPS);
@@ -31,6 +36,12 @@ public class CementBrick extends Brick {
         return new Rectangle(pos,size);
     }
 
+    /**
+     * Draws out crack on brick upon impact
+     * @param point
+     * @param dir
+     * @return
+     */
     @Override
     public boolean setImpact(Point2D point, int dir) {
         if(super.isBroken())
@@ -50,6 +61,9 @@ public class CementBrick extends Brick {
         return brickFace;
     }
 
+    /**
+     * Makes crack if hit once
+     */
     private void updateBrick(){
         if(!super.isBroken()){
             GeneralPath gp = crack.draw();
@@ -58,6 +72,9 @@ public class CementBrick extends Brick {
         }
     }
 
+    /**
+     * Resets brick to original state
+     */
     public void repair(){
         super.repair();
         crack.reset();
