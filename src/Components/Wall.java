@@ -21,6 +21,9 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+/**
+ * Updates ball, brick, ball impacts, brickCount and ballCount on each level
+ */
 public class Wall {
 
     private Random rnd;
@@ -39,7 +42,6 @@ public class Wall {
     private static int ballCount;
     private static boolean ballLost;
 
-    //for score and highscore
     static int score;
     public int levelScore[] = new int[6];
 
@@ -68,8 +70,8 @@ public class Wall {
 
         makeBall(ballPos);
         int speedX,speedY;
-        speedX = 3;
-        speedY = -3;
+        speedX = 2;
+        speedY = -2;
 
         ball.setSpeed(speedX,speedY);
 
@@ -89,6 +91,9 @@ public class Wall {
         ball.move();
     }
 
+    /**
+     * Checks the types of impacts the ball made and act accordingly
+     */
     public void findImpacts(){
         if(player.impact(ball)){
             ball.reverseY();
@@ -126,7 +131,7 @@ public class Wall {
     }
 
     /**
-     *
+     * changes ball moving position when it hits the brick
      * @return
      */
     private boolean impactWall(){
@@ -159,12 +164,19 @@ public class Wall {
         return false;
     }
 
+    /**
+     * Count increases upon number of impacts
+     * Adds count to score
+     */
     private void addScore() {
         count++;
         score += count;
         count = 0;
     }
 
+    /**
+     * Saves each individual level's score in an array
+     */
     public void highScore() {
         int score = getScore();
         if(i < 6){
@@ -173,6 +185,10 @@ public class Wall {
         i++;
     }
 
+    /**
+     * Checks if ball hits the border
+     * @return boolean value of hitting border of window
+     */
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
@@ -190,16 +206,22 @@ public class Wall {
         return ballLost;
     }
 
+    /**
+     * Resets ball position and ball speed
+     */
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
         int speedX,speedY;
-        speedX = 3;
-        speedY = -3;
+        speedX = 2;
+        speedY = -2;
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }
 
+    /**
+     * Resets brick count & ball count when goes to next level
+     */
     public void wallReset(){
         for(Brick b : bricks)
             b.repair();
@@ -215,6 +237,9 @@ public class Wall {
         return brickCount == 0;
     }
 
+    /**
+     * Goes to next level
+     */
     public void nextLevel(){
         bricks = levels[level++];
         this.brickCount = bricks.length;
