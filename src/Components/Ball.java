@@ -24,6 +24,14 @@ abstract public class Ball {
     private static int speedX;
     private static int speedY;
 
+    /**
+     * Ball constructor
+     * @param center = gets location of ball
+     * @param radiusA = ball radius
+     * @param radiusB = ball radius
+     * @param inner = inner ball color
+     * @param border = ball border color
+     */
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){
         this.center = center;
 
@@ -40,14 +48,40 @@ abstract public class Ball {
 
 
         ballFace = makeBall(center,radiusA,radiusB);
-        this.border = border;
-        this.inner  = inner;
+
+        setColor(inner, border);
+        zeroSpeed();
+    }
+
+    /**
+     * Sets speed to 0
+     */
+    private void zeroSpeed() {
         speedX = 0;
         speedY = 0;
     }
 
+    /**
+     * Sets color of ball
+     * @param inner = inner ball color
+     * @param border = border color
+     */
+    private void setColor(Color inner, Color border) {
+        this.border = border;
+        this.inner  = inner;
+    }
+    /**
+     * Creates the ball
+     * @param center = the center point of ball
+     * @param radiusA = radius of ball
+     * @param radiusB = radius of ball
+     * @return
+     */
     protected abstract Shape makeBall(Point2D center,int radiusA,int radiusB);
 
+    /**
+     * Allows ball to move
+     */
     public void move(){
         RectangularShape tmp = (RectangularShape) ballFace;
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
@@ -61,20 +95,38 @@ abstract public class Ball {
         ballFace = tmp;
     }
 
+    /**
+     * Set speed of ball
+     * @param x = horizontal speed
+     * @param y = vertical speed
+     */
     public static void setSpeed(int x,int y){
         speedX = x;
         speedY = y;
     }
 
+    /**
+     * Increases speed of ball
+     * @param x = horizontal speed
+     * @param y = vertical speed
+     */
     public static void updateSpeed(int x, int y) {
         speedX = x;
         speedY = y;
     }
 
+    /**
+     * Set horizontal speed
+     * @param s
+     */
     public void setXSpeed(int s){
         speedX = s;
     }
 
+    /**
+     * Set vertical speed
+     * @param s
+     */
     public void setYSpeed(int s){
         speedY = s;
     }
@@ -87,22 +139,42 @@ abstract public class Ball {
         speedY *= -1;
     }
 
+    /**
+     * Get ball's border color
+     * @return
+     */
     public Color getBorderColor(){
         return border;
     }
 
+    /**
+     * Get ball's color
+     * @return
+     */
     public Color getInnerColor(){
         return inner;
     }
 
+    /**
+     * Get ball's position
+     * @return
+     */
     public Point2D getPosition(){
         return center;
     }
 
+    /**
+     * Get shape of ball
+     * @return
+     */
     public Shape getBallFace(){
         return ballFace;
     }
 
+    /**
+     * Allows the ball to move to calculated location
+     * @param p = gets location of ball
+     */
     public void moveTo(Point p){
         center.setLocation(p);
 
@@ -114,6 +186,11 @@ abstract public class Ball {
         ballFace = tmp;
     }
 
+    /**
+     * Set the location of ball
+     * @param width
+     * @param height
+     */
     private void setPoints(double width,double height){
         up.setLocation(center.getX(),center.getY()-(height / 2));
         down.setLocation(center.getX(),center.getY()+(height / 2));
@@ -122,10 +199,18 @@ abstract public class Ball {
         right.setLocation(center.getX()+(width / 2),center.getY());
     }
 
+    /**
+     * Returns horizontal speed
+     * @return speedX
+     */
     public int getSpeedX(){
         return speedX;
     }
 
+    /**
+     * Returns vertical speed
+     * @return speedY
+     */
     public int getSpeedY(){
         return speedY;
     }
