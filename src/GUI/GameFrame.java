@@ -17,21 +17,24 @@
  */
 package GUI;
 
-import Controller.GameBoard;
+import Controller.GameBoardController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
-
+/**
+ * Updates which screen to appear and disappear
+ */
 public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
 
-    private GameBoard gameBoard;
     private HomeMenu homeMenu;
     private Instructions instructions;
+    private GameBoardView view;
+    private GameBoardController controller;
 
     private boolean gaming;
 
@@ -42,7 +45,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         this.setLayout(new BorderLayout());
 
-        gameBoard = new GameBoard(this);
+        view = new GameBoardView(this);
+
+        controller = new GameBoardController(this, view);
 
         homeMenu = new HomeMenu(this,new Dimension(550, 432));
 
@@ -55,6 +60,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
 
+    /**
+     * Enables screens to be visible
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,6 +71,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setVisible(true);
     }
 
+    /**
+     * Enables instruction screen to appear
+     */
     public void enableInstruction(){
         this.dispose();
         this.remove(homeMenu);
@@ -72,17 +83,23 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.addWindowFocusListener(this);
     }
 
+    /**
+     * Enables game levels screen to appear
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
-        this.add(gameBoard,BorderLayout.CENTER);
+        this.add(controller);
+        this.add(view,BorderLayout.CENTER);
         this.setUndecorated(false);
         initialize();
         /*to avoid problems with graphics focus controller is added here*/
         this.addWindowFocusListener(this);
-
     }
 
+    /**
+     * Enables start screen to appear
+     */
     public void enableHomeMenu() {
         this.dispose();
         this.remove(instructions);
@@ -116,7 +133,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)
-            gameBoard.onLostFocus();
+            controller.onLostFocus();
 
     }
 }
