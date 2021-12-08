@@ -10,13 +10,22 @@ public class Levels {
 
     private static final int LEVELS_COUNT = 6;
 
-    private MakeBrickFactory makeBrickFactory = new MakeBrickFactory();
+    private Dimension brickSize;
+    private MakeBrickFactory makeBrickFactory;
 
-    private final int CLAY = makeBrickFactory.CLAY;
-    private final int STEEL = makeBrickFactory.STEEL;
-    private final int CEMENT = makeBrickFactory.CEMENT;
-    private final int SPEED = makeBrickFactory.SPEED;
+    private final int CLAY = 1;
+    private final int STEEL = 2;
+    private final int CEMENT = 3;
+    private final int SPEED = 4;
 
+    /**
+     * Creates the different levels of bricks
+     * @param drawArea = draw the area where the bricks should be
+     * @param brickCount = number of bricks
+     * @param lineCount = number of lines made between bricks
+     * @param brickDimensionRatio = size of brick
+     * @return
+     */
     public Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,SPEED, CLAY);
@@ -57,7 +66,10 @@ public class Levels {
 
         Brick[] tmp  = new Brick[brickCnt];
 
-        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
+        brickSize = new Dimension((int) brickLen,(int) brickHgt);
+
+        makeBrickFactory  = new MakeBrickFactory(brickSize);
+
         Point p = new Point();
 
         int i;
@@ -72,13 +84,13 @@ public class Levels {
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrickFactory.makeBrick(p,brickSize,typeA) : makeBrickFactory.makeBrick(p,brickSize,typeB);
+            tmp[i] = b ?  makeBrickFactory.makeBrick(p,typeA) : makeBrickFactory.makeBrick(p,typeB);
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = makeBrickFactory.makeBrick(p,brickSize,typeA);
+            tmp[i] = makeBrickFactory.makeBrick(p,typeA);
         }
         return tmp;
     }
