@@ -25,7 +25,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
-
+/**
+ * This is the Start screen
+ */
 public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener,Screen {
 
     private static final String GREETINGS = "Welcome to:";
@@ -87,6 +89,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         drawScreen((Graphics2D)g);
     }
 
+    /**
+     * Draw components in the screen
+     * @param g
+     */
     @Override
     public void drawScreen(Graphics2D g2d){
 
@@ -125,6 +131,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.drawImage(picture, 20, 0, this);
     }
 
+    /**
+     * Draw text in screen
+     * @param g
+     */
     @Override
     public void drawText(Graphics2D g2d){
 
@@ -157,6 +167,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
+    /**
+     * Draw buttons on screen
+     * @param g
+     */
     @Override
     public void drawButton(Graphics2D g2d){
 
@@ -250,6 +264,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
+    /**
+     * When mouse clicks on button, open start screen
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -266,6 +284,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * When long press on button, repaint button
+     * @param mouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -283,6 +305,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * When release mouse from button, repaint button
+     * @param e
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(startClicked ){
@@ -315,6 +341,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
+    /**
+     * Have default cursor on screen
+     * @param mouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
