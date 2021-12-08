@@ -46,12 +46,28 @@ abstract public class Brick  {
 
     }
 
+    /**
+     * Return random value
+     * @return
+     */
     public static Random getRND() {
         return rnd;
     }
 
+    /**
+     * Create the brick
+     * @param pos = brick position
+     * @param size = brick size
+     * @return
+     */
     protected abstract Shape makeBrickFace(Point pos,Dimension size);
 
+    /**
+     * Check if brick is broken
+     * @param point
+     * @param dir
+     * @return
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
             return false;
@@ -60,8 +76,6 @@ abstract public class Brick  {
     }
 
     public abstract Shape getBrick();
-
-
 
     public Color getBorderColor(){
         return  border;
@@ -72,6 +86,11 @@ abstract public class Brick  {
     }
 
 
+    /**
+     * Find the location of impact made by ball
+     * @param b = the ball
+     * @return
+     */
     public final int findImpact(Ball b){
         if(broken)
             return 0;
@@ -91,11 +110,17 @@ abstract public class Brick  {
         return broken;
     }
 
+    /**
+     * Resets brick strength and redraw destroyed bricks
+     */
     public void repair() {
         broken = false;
         strength = fullStrength;
     }
 
+    /**
+     *Decreases strength of brick & updates state of brick (broken or not)
+     */
     public void impact(){
         strength--;
         broken = (strength == 0);
