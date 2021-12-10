@@ -10,6 +10,9 @@ import java.awt.geom.Point2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JUnit test for ball class
+ */
 class BallTest {
 
     private final Point2D Center = new Point(20, 20);
