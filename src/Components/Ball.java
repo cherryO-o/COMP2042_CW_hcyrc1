@@ -147,12 +147,20 @@ abstract public class Ball {
         return border;
     }
 
+    public void setBorderColor(Color border) {
+        this.border = border;
+    }
+
     /**
      * Get ball's color
      * @return
      */
     public Color getInnerColor(){
         return inner;
+    }
+
+    public void setInnerColor(Color inner) {
+        this.inner = inner;
     }
 
     /**
@@ -215,5 +223,12 @@ abstract public class Ball {
         return speedY;
     }
 
+    public Point2D getCenter() {
+        return center;
+    }
+
+    public void setCenter(Point2D center) {
+        this.center = center;
+    }
 
 }
