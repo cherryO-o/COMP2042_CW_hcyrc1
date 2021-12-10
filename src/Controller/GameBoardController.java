@@ -3,7 +3,6 @@ package Controller;
 import Components.CountDown;
 import Components.Wall;
 import GUI.GameBoardView;
-import GUI.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;

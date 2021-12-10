@@ -19,6 +19,7 @@ package Controller;
 
 import Components.Ball;
 import Components.Wall;
+import GUI.GameBoardView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,11 +33,11 @@ public class DebugConsole extends JDialog implements WindowListener{
 
     private JFrame owner;
     private DebugPanel debugPanel;
-    private GameBoard gameBoard;
+    private GameBoardView gameBoard;
     private Wall wall;
 
 
-    public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
+    public DebugConsole(JFrame owner, Wall wall, GameBoardView gameBoard){
 
         this.wall = wall;
         this.owner = owner;

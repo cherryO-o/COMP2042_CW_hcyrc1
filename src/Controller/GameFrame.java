@@ -15,9 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package GUI;
+package Controller;
 
 import Controller.GameBoardController;
+import GUI.GameBoardView;
+import GUI.HomeMenu;
+import GUI.Instructions;
 
 import javax.swing.*;
 import java.awt.*;
