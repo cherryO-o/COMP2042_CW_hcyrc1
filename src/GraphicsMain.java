@@ -20,7 +20,9 @@ import Controller.GameFrame;
 
 import java.awt.*;
 
-
+/**
+ * The main class, initializes the whole game
+ */
 public class GraphicsMain {
 
     public static void main(String[] args){
