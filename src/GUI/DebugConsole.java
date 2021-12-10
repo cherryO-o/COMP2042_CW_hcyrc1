@@ -15,11 +15,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Controller;
+package GUI;
 
 import Components.Ball;
 import Components.Wall;
-import GUI.GameBoardView;
+import Controller.DebugPanel;
 
 import javax.swing.*;
 import java.awt.*;
