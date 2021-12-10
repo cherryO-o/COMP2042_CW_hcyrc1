@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.GameFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,7 +12,9 @@ import java.awt.geom.Rectangle2D;
 
 import java.awt.Image;
 
-
+/**
+ * This is the Instruction screen
+ */
 public class Instructions extends JComponent implements MouseListener, MouseMotionListener, Screen {
     private static final String TITLE = "HOW TO PLAY";
     private static final String INSTRUCT1 = "1) Press SPACEBAR to START the game.";
@@ -62,6 +66,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         drawScreen((Graphics2D)g);
     }
 
+    /**
+     * Draw components in the screen
+     * @param g
+     */
     @Override
     public void drawScreen(Graphics2D g) {
         drawContainer(g);
@@ -82,6 +90,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         g.setColor(prevColor);
     }
 
+    /**
+     * Draw components in the screen
+     * @param g
+     */
     @Override
     public void drawContainer(Graphics2D g){
 
@@ -93,6 +105,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
 
     }
 
+    /**
+     * Draw text in screen
+     * @param g
+     */
     @Override
     public void drawText(Graphics2D g){
 
@@ -146,6 +162,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         g.drawString(INSTRUCT6,sX,sY);
     }
 
+    /**
+     * Draw buttons on screen
+     * @param g
+     */
     @Override
     public void drawButton(Graphics2D g){
 
@@ -180,6 +200,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         }
     }
 
+    /**
+     * When mouse clicks on button, open start screen
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -188,6 +212,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         }
     }
 
+    /**
+     * When long press on button, repaint button
+     * @param mouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -197,6 +225,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
         }
     }
 
+    /**
+     * When release mouse from button, repaint button
+     * @param e
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if(backClicked){
@@ -221,6 +253,10 @@ public class Instructions extends JComponent implements MouseListener, MouseMoti
 
     }
 
+    /**
+     * Have default cursor on screen
+     * @param mouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
