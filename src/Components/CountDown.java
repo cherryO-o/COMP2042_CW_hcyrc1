@@ -12,14 +12,23 @@ public class CountDown implements ActionListener{
     Timer timer = new Timer(1000, this);
     int seconds = 120;
 
+    /**
+     * Starts countdown
+     */
     public void countDownStart() {
         timer.start();
     }
 
+    /**
+     * Resets timer
+     */
     public void resetTimer() {
         seconds = 120;
     }
 
+    /**
+     * Stops timer
+     */
     public void stopTimer() {
         timer.stop();
     }

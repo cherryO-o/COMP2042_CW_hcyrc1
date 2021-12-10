@@ -10,6 +10,7 @@ import java.awt.event.*;
 
 /**
  * This class is the Controller of GameBoard
+ * Controls functionality and changes what will be presented on screen
  */
 public class GameBoardController extends JComponent implements KeyListener, MouseListener, MouseMotionListener {
 
@@ -35,6 +36,9 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
         this.gameTimer();
     }
 
+    /**
+     * Controls the main functionalities of the game
+     */
     private void gameTimer() {
         gameTimer = new Timer(10, e ->{
             view.wall.move();
@@ -76,6 +80,10 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
             view.repaint();
         });
     }
+
+    /**
+     * Initializes the game screen
+     */
     private void initialize(){
         view.setPreferredSize(new Dimension(view.DEF_WIDTH, view.DEF_HEIGHT));
         this.setFocusable(true);

@@ -25,7 +25,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * The debug window
+ */
 public class DebugPanel extends JPanel {
 
     private static final Color DEF_BKG = Color.WHITE;
@@ -65,12 +67,25 @@ public class DebugPanel extends JPanel {
         this.setLayout(new GridLayout(2,2));
     }
 
+    /**
+     * Creates the buttons for the debug panel
+     * @param title = button name
+     * @param e
+     * @return
+     */
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
+    /**
+     * Slider for debug panel
+     * @param min = minimum value of slider
+     * @param max = maximum value of slider
+     * @param e
+     * @return
+     */
     private JSlider makeSlider(int min, int max, ChangeListener e){
         JSlider out = new JSlider(min,max);
         out.setMajorTickSpacing(1);
@@ -80,6 +95,11 @@ public class DebugPanel extends JPanel {
         return out;
     }
 
+    /**
+     * Sets ball speed values
+     * @param x
+     * @param y
+     */
     public void setValues(int x,int y){
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);

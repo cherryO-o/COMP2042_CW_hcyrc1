@@ -17,10 +17,10 @@
  */
 package Controller;
 
-import Controller.GameBoardController;
 import GUI.GameBoardView;
-import GUI.HomeMenu;
+import GUI.StartScreen;
 import GUI.Instructions;
+import GUI.StartScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
 
-    private HomeMenu homeMenu;
+    private StartScreen startScreen;
     private Instructions instructions;
     private GameBoardView view;
     private GameBoardController controller;
@@ -52,11 +52,11 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         controller = new GameBoardController(this, view);
 
-        homeMenu = new HomeMenu(this,new Dimension(550, 432));
+        startScreen = new StartScreen(this,new Dimension(550, 432));
 
         instructions = new Instructions(this,new Dimension(550, 432));
 
-        this.add(homeMenu,BorderLayout.CENTER);
+        this.add(startScreen,BorderLayout.CENTER);
 
         this.setUndecorated(true);
 
@@ -79,7 +79,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
      */
     public void enableInstruction(){
         this.dispose();
-        this.remove(homeMenu);
+        this.remove(startScreen);
         this.add(instructions,BorderLayout.CENTER);
         this.setUndecorated(true);
         initialize();
@@ -91,7 +91,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
      */
     public void enableGameBoard(){
         this.dispose();
-        this.remove(homeMenu);
+        this.remove(startScreen);
         this.add(controller);
         this.add(view,BorderLayout.CENTER);
         this.setUndecorated(false);
@@ -106,7 +106,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     public void enableHomeMenu() {
         this.dispose();
         this.remove(instructions);
-        this.add(homeMenu,BorderLayout.CENTER);
+        this.add(startScreen,BorderLayout.CENTER);
         this.setUndecorated(true);
         initialize();
         this.addWindowFocusListener(this);
@@ -119,7 +119,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLocation(x,y);
     }
 
-
+    /**
+     * If window is focusing
+     * @param windowEvent
+     */
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
@@ -133,6 +136,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         gaming = true;
     }
 
+    /**
+     * If window lost focus
+     * @param windowEvent
+     */
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)

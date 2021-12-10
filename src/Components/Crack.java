@@ -39,6 +39,10 @@ public class Crack {
     }
 
 
+    /**
+     * Draws the crack
+     * @return
+     */
     public GeneralPath draw() {
 
         return crack;
@@ -48,6 +52,11 @@ public class Crack {
         crack.reset();
     }
 
+    /**
+     * Calculates the direction the crack will be facing
+     * @param point = starting point of crack
+     * @param direction = direction it moves towards to
+     */
     protected void makeCrack(Point2D point, int direction) {
         Rectangle bounds = brick.brickFace.getBounds();
 
@@ -88,6 +97,11 @@ public class Crack {
         }
     }
 
+    /**
+     * Creates a crack
+     * @param start = starting point of crack
+     * @param end = where crack ends
+     */
     protected void makeCrack(Point start, Point end) {
 
         GeneralPath path = new GeneralPath();
@@ -139,6 +153,13 @@ public class Crack {
 
     }
 
+    /**
+     * Makes the crack move in a random direction
+     * @param from
+     * @param to
+     * @param direction
+     * @return
+     */
     private Point makeRandomPoint(Point from, Point to, int direction) {
 
         Point out = new Point();
