@@ -7,7 +7,6 @@ import java.awt.font.FontRenderContext;
 
 import Components.CountDown;
 import Components.Wall;
-import Controller.DebugConsole;
 
 /**
  * This class is the View of GameBoard
