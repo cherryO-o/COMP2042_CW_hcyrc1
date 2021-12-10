@@ -30,7 +30,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * This is the Start screen
  */
-public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener,Screen {
+public class StartScreen extends JComponent implements MouseListener, MouseMotionListener,Screen {
 
     private static final String GREETINGS = "Welcome to:";
     private static final String GAME_TITLE = "Brick Destroy";
@@ -61,7 +61,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private boolean menuClicked;
     private boolean instructionClicked;
 
-    public HomeMenu(GameFrame owner,Dimension area){
+    public StartScreen(GameFrame owner,Dimension area){
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -93,7 +93,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     /**
      * Draw components in the screen
-     * @param g
+     * @param g2d
      */
     @Override
     public void drawScreen(Graphics2D g2d){
@@ -135,7 +135,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     /**
      * Draw text in screen
-     * @param g
+     * @param g2d
      */
     @Override
     public void drawText(Graphics2D g2d){
@@ -171,7 +171,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     /**
      * Draw buttons on screen
-     * @param g
+     * @param g2d
      */
     @Override
     public void drawButton(Graphics2D g2d){
@@ -309,7 +309,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     /**
      * When release mouse from button, repaint button
-     * @param e
+     * @param mouseEvent
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
