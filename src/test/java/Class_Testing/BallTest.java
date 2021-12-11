@@ -120,8 +120,8 @@ class BallTest {
     @Test
     void testGetPosition() {
         // Setup
-        final Point2D expectedResult = new Point(10,30);
-        Ball.setCenter(new Point(10,20));
+        final Point2D expectedResult = new Point(10,40);
+        Ball.setCenter(new Point(10,40));
 
         // Run the test
         final Point2D result = Ball.getPosition();
