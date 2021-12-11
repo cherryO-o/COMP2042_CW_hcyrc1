@@ -14,6 +14,7 @@
     </properties>
 
     <build>
+        <pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -22,12 +23,13 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>test.GraphicsMain</mainClass>
+                            <mainClass>GraphicsMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
     
 </project>
