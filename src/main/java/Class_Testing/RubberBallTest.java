@@ -1,4 +1,4 @@
-package Components;
+package Class_Testing;
 
 import org.junit.jupiter.api.Test;
 

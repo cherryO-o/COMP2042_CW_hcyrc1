@@ -110,7 +110,6 @@ public class Wall {
             }
             else {
                 score += 10;
-//                score += count;
                   count = 0;
             }
         }

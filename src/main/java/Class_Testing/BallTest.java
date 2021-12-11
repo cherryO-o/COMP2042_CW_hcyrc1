@@ -1,4 +1,4 @@
-package Components;
+package Class_Testing;
 
 import Components.Ball;
 import org.junit.jupiter.api.BeforeEach;

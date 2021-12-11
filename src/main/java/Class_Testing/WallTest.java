@@ -1,5 +1,6 @@
-package Components;
+package Class_Testing;
 
+import Components.Wall;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -32,8 +32,6 @@ abstract public class Brick  {
     private int strength;
 
     private boolean broken;
-    public static boolean brokenTest;
-
 
     public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
         rnd = new Random();
@@ -126,13 +124,16 @@ abstract public class Brick  {
         broken = (strength == 0);
     }
 
-    /**
-     * Made dummy method for testing instead of using isBroken()
-     * All bricks disappear when hit if isBroken() & broken is static
-     * @return brokenTest (dummy variable)
-     */
-    public static boolean isBrokenTest() {
-        return brokenTest;
+    public Shape getBrickFace() {
+        return brickFace;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int i) {
+        strength = i;
     }
 }
 
