@@ -28,10 +28,6 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
         wall = new Wall(new Rectangle(0,0,view.DEF_WIDTH,view.DEF_HEIGHT),30,3,3,new Point(300,430));
         countDown = new CountDown();
 
-//        exitButtonRect  = view.exitButtonRect;
-//        restartButtonRect =  view.restartButtonRect;
-//        continueButtonRect = view.continueButtonRect;
-
         this.initialize();
         this.gameTimer();
     }
