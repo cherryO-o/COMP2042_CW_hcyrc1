@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PlayerTest {
 
+    /**
+     * Test on moveLeft
+     */
     @Test
     void moveLeft() {
         int DEF_MOVE_AMOUNT = 5;
@@ -16,8 +19,11 @@ class PlayerTest {
         assertEquals(-5,moveAmount);
     }
 
+    /**
+     * Test on moveRight()
+     */
     @Test
-    void movRight() {
+    void moveRight() {
         int DEF_MOVE_AMOUNT = 5;
         int moveAmount;
         moveAmount = DEF_MOVE_AMOUNT;
