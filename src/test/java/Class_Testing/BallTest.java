@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BallTest {
 
     private final Point2D Center = new Point(20, 20);
-    private final Color Inner = new Color(2, 2, 2, 2);
-    private final Color Border = new Color(1, 1, 1, 1);
+    private final Color Inner = new Color(5, 5, 5);
+    private final Color Border = new Color(1, 1, 1);
 
     private Ball Ball;
 
@@ -34,134 +34,139 @@ class BallTest {
             }
         };
     }
+
+    /**
+     * Test on move()
+     */
     @Test
     void testMove() {
-        // Setup
         Ball.setCenter(new Point(0,0));
         Ball.setSpeed(2,2);
 
-
-        // Run the test
         Ball.move();
 
-        // Verify the results
         assertEquals(2,Ball.getCenter().getX());
     }
 
+    /**
+     * Test setXSpeed()
+     */
     @Test
-    void testSetXSpeed() {
-        // Setup
-
-        // Run the test
+    void testSetXSpeeed(){
         Ball.setXSpeed(0);
 
-        // Verify the results
         assertEquals(0,Ball.getSpeedX());
     }
 
+    /**
+     * Test setYSpeed()
+     */
     @Test
     void testSetYSpeed() {
-        // Setup
-        // Run the test
         Ball.setYSpeed(0);
 
-        // Verify the results
         assertEquals(0,Ball.getSpeedY());
     }
 
+    /**
+     * Test reverseX()
+     */
     @Test
     void testReverseX() {
-        // Setup
-        // Run the test
         Ball.setXSpeed(2);
         Ball.reverseX();
 
-        // Verify the results
         assertEquals(-2,Ball.getSpeedX());
     }
 
+    /**
+     * Test reverseY()
+     */
     @Test
     void testReverseY() {
-        // Setup
-        // Run the test
         Ball.setYSpeed(2);
         Ball.reverseY();
 
-        // Verify the results
         assertEquals(-2,Ball.getSpeedY());
     }
 
+    /**
+     * Test getBorderColor()
+     */
     @Test
     void testGetBorderColor() {
-        // Setup
-        final Color expectedResult = new Color(0, 0, 0, 0);
+        final Color expectedResult = new Color(5, 5, 5);
         Ball.setBorderColor(expectedResult);
 
-        // Run the test
         final Color result = Ball.getBorderColor();
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test getInnerColor()
+     */
     @Test
     void testGetInnerColor() {
-        // Setup
-        final Color expectedResult = new Color(0, 0, 0, 0);
+        final Color expectedResult = new Color(5, 5, 5);
         Ball.setInnerColor(expectedResult);
 
-        // Run the test
         final Color result = Ball.getInnerColor();
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test getPosition()
+     */
     @Test
     void testGetPosition() {
-        // Setup
         final Point2D expectedResult = new Point(10,40);
         Ball.setCenter(new Point(10,40));
 
-        // Run the test
         final Point2D result = Ball.getPosition();
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test getSpeedX()
+     */
     @Test
     void testGetSpeedX() {
         assertEquals(0, Ball.getSpeedX());
     }
 
+    /**
+     * Test getSpeedY()
+     */
     @Test
     void testGetSpeedY() {
         assertEquals(0, Ball.getSpeedY());
     }
 
+    /**
+     * Test setSpeed()
+     */
     @Test
     void testSetSpeed() {
-        // Setup
-        // Run the test
         int x = 0;
         int y = 0;
         Ball.setSpeed(x, y);
 
-        // Verify the results
         assertEquals(x,Ball.getSpeedX());
         assertEquals(y,Ball.getSpeedY());
     }
 
+    /**
+     * Test updateSpeed()
+     */
     @Test
     void testUpdateSpeed() {
-        // Setup
-        // Run the test
         int x = 0;
         int y = 0;
         Ball.updateSpeed(x, x);
 
-        // Verify the results
         assertEquals(x,Ball.getSpeedX());
         assertEquals(y,Ball.getSpeedY());
     }
