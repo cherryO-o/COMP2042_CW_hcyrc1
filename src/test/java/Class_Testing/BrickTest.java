@@ -11,6 +11,9 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit test for brick class
+ */
 class BrickTest {
 
     private final Point testBrickPos = new Point (40,40);
@@ -21,6 +24,9 @@ class BrickTest {
 
     private Brick brick;
 
+    /**
+     * Create a brick to use for testing
+     */
     @BeforeEach
     void setUp() {
         brick = new Brick(name, testBrickPos, size, border,inner,10) {
@@ -36,11 +42,17 @@ class BrickTest {
         };
     }
 
+    /**
+     * Test setImpact()
+     */
     @Test
     void testSetImpact() {
         assertFalse(brick.setImpact(testBrickPos, 1));
     }
 
+    /**
+     * Test getBorderColor()
+     */
     @Test
     void testGetBorderColor() {
 
@@ -51,6 +63,9 @@ class BrickTest {
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test getInnerColor()
+     */
     @Test
     void testGetInnerColor() {
 
@@ -61,6 +76,9 @@ class BrickTest {
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Test findImpact() on left impact
+     */
     @Test
     void testFindImpactWhenBallHitsLeftSideOfBrick() {
         Ball ball = new RubberBall(new Point(35,40));
@@ -70,6 +88,9 @@ class BrickTest {
         assertEquals(Brick.LEFT_IMPACT, result);
     }
 
+    /**
+     * Test findImpact() on right impact
+     */
     @Test
     void testFindImpactWhenBallHitsRightSideOfBrick(){
         Ball ball = new RubberBall(new Point(55, 40));
@@ -79,6 +100,9 @@ class BrickTest {
         assertEquals(Brick.RIGHT_IMPACT, result);
     }
 
+    /**
+     * Test findImpact() on up impact
+     */
     @Test
     void testFindImpactWhenBallHitsTopOfBrick(){
         Ball ball = new RubberBall(new Point(45,35));
@@ -88,6 +112,9 @@ class BrickTest {
         assertEquals(Brick.UP_IMPACT, result);
     }
 
+    /**
+     * Test findImpact() on down impact
+     */
     @Test
     void testFindImpactWhenBallHitsBottomOfBrick(){
         Ball ball = new RubberBall(new Point(45, 50));
@@ -98,6 +125,9 @@ class BrickTest {
 
     }
 
+    /**
+     * Test repair()
+     */
     @Test
     void testRepair() {
         brick.impact();
@@ -106,6 +136,9 @@ class BrickTest {
         assertEquals(10, brick.getStrength());
     }
 
+    /**
+     * Test of the ball made impact on brick
+     */
     @Test
     void testImpactWhenNotAboutToBreak() {
 
@@ -115,6 +148,9 @@ class BrickTest {
         assertEquals(expected,brick.getStrength());
     }
 
+    /**
+     * Test of the brick breaking
+     */
     @Test
     void testImpactWhenAboutToBreak() {
 
