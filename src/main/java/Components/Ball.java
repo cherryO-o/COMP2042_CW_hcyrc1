@@ -24,6 +24,9 @@ abstract public class Ball {
     private static int speedX;
     private static int speedY;
 
+    private double width;
+    private double height;
+
     /**
      * Ball constructor
      * @param center = gets location of ball
@@ -83,16 +86,44 @@ abstract public class Ball {
      * Allows ball to move
      */
     public void move(){
-        RectangularShape tmp = (RectangularShape) ballFace;
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
-        double w = tmp.getWidth();
-        double h = tmp.getHeight();
+        setLocation();
+        setPoints(width,height);
 
-        tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
-        setPoints(w,h);
+    }
 
+    /**
+     * Allows the ball to move to calculated location
+     * @param p = gets location of ball
+     */
+    public void moveTo(Point p){
+        center.setLocation(p);
+        setLocation();
+    }
 
+    /**
+     * Duplicated code in move() and moveTo()
+     */
+    private void setLocation() {
+        RectangularShape tmp = (RectangularShape) ballFace;
+        width = tmp.getWidth();
+        height = tmp.getHeight();
+
+        tmp.setFrame((center.getX() -(width / 2)),(center.getY() - (height / 2)),width,height);
         ballFace = tmp;
+    }
+
+    /**
+     * Set the location of ball
+     * @param width
+     * @param height
+     */
+    private void setPoints(double width,double height){
+        up.setLocation(center.getX(),center.getY()-(height / 2));
+        down.setLocation(center.getX(),center.getY()+(height / 2));
+
+        left.setLocation(center.getX()-(width / 2),center.getY());
+        right.setLocation(center.getX()+(width / 2),center.getY());
     }
 
     /**
@@ -177,34 +208,6 @@ abstract public class Ball {
      */
     public Shape getBallFace(){
         return ballFace;
-    }
-
-    /**
-     * Allows the ball to move to calculated location
-     * @param p = gets location of ball
-     */
-    public void moveTo(Point p){
-        center.setLocation(p);
-
-        RectangularShape tmp = (RectangularShape) ballFace;
-        double w = tmp.getWidth();
-        double h = tmp.getHeight();
-
-        tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
-        ballFace = tmp;
-    }
-
-    /**
-     * Set the location of ball
-     * @param width
-     * @param height
-     */
-    private void setPoints(double width,double height){
-        up.setLocation(center.getX(),center.getY()-(height / 2));
-        down.setLocation(center.getX(),center.getY()+(height / 2));
-
-        left.setLocation(center.getX()-(width / 2),center.getY());
-        right.setLocation(center.getX()+(width / 2),center.getY());
     }
 
     /**
